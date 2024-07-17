@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 532573d6f83c4f44a889c3fe2ab80310
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Pirate_Blue_A_Prefab: {fileID: 8773913642712427663, guid: bb49e2ad6ea70404f9f2362448277592, type: 3}
+  - Pirate_Blue_B_Prefab: {fileID: 8773913642712427663, guid: 9e2583b803a354b49a740e81c2e03664, type: 3}
+  - Pirate_Red_A_Prefab: {fileID: 8773913642712427663, guid: 5c051bbaf31396e468421c45d85cd679, type: 3}
+  - Pirate_Red_B_Prefab: {fileID: 8773913642712427663, guid: c2be43c0217c69647b6b39695732fdf3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

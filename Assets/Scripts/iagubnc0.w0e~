@@ -1,0 +1,187 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GameManager : MonoBehaviour
+{
+	
+	[SerializeField] private PlayerInputManager inputManager;
+	[SerializeField] private ChestSpawner chestSpawner;
+	[SerializeField] private PirateSpawner pirateSpawner;
+	[SerializeField] private GameObject gameButtonsParent;
+	[SerializeField] private GameObject pregameButtonsParent;
+
+	//private Button[] pirateButtons;
+
+	private Pirate currentPirateCheck;
+	private int turnCounter = 1;
+	//private bool gameStarted = false;
+
+	public void Start()
+	{
+		GetGameButtons();
+		//GetPreGameButtons();
+		//UpdatePirateButtons();
+	}
+
+	public void Update()
+	{
+
+		if (!CheckCurrentPirate())
+		{
+			SetCurrentPirate();
+			//UpdatePirateButtons();
+			//UpdateItemButtonStats();
+			//GameState();
+		}
+
+		//MoveButtonStatus(!inputManager.moveUsed);
+		//UpdateItemButtonStats();
+	}
+
+	public void InitLevel()
+	{
+		pirateSpawner.CreatePirates();
+		inputManager.BuildInputManager();
+		currentPirateCheck = null;
+		printData();
+		//gameStarted = true;
+		inputManager.Startup();
+	}
+
+	private void GetGameButtons()
+	{
+		 for (int i = 0; i < gameButtonsParent.transform.childCount; i++)
+		{
+			GameObject childObject = gameButtonsParent.transform.GetChild(i).gameObject;
+			Debug.Log("Child Object Name: " + childObject.name);
+		}
+	}
+
+	//private void GetPreGameButtons()
+	//{
+	//	Button[] components = pregameButtonsParent.GetComponentsInChildren<Button>(true);
+	//	for (int i = 0; i < components.Length; i++)
+	//	{
+	//		Debug.Log("COMPONENT NAME: " + components[i].name);
+	//	}
+	//}
+
+	private void printData()
+	{
+		Debug.Log(GetCurrentTeamManager().ToString());
+	}
+
+	private bool CheckCurrentPirate()
+	{
+		return currentPirateCheck == inputManager.GetCurrentPirateGlobal();
+	}
+
+	private void SetCurrentPirate()
+	{
+		currentPirateCheck = inputManager.GetCurrentPirateGlobal();
+	}
+
+	//private bool UpdatePirateButtons()
+	//{
+	//	return SetPirateButtons(inputManager.GetCurrentPirateGlobal() != null && inputManager.IsCurrentPirateOnCurrentTeam() && gameStarted);
+	//}
+
+	//private bool SetPirateButtons(bool b)
+	//{
+	//	for (int i = 0; i < allButtons.Length; i++)
+	//	{
+	//		allButtons[i].GetComponent<Button>().enabled = b;
+	//		allButtons[i].GetComponent<Button>().interactable = b;
+	//		allButtons[i].SetActive(b);
+	//	} return b;
+	//}
+
+	//private void UpdateItemButtonStats()
+	//{
+	//	int currentIndex = 0;
+	//	if(inputManager.GetCurrentPirateGlobal()!=null)
+	//	{
+	//		foreach (var item in inputManager.GetCurrentPirateGlobal().GetItems())
+	//		{
+	//			if (items[currentIndex] != null && items[currentIndex].enabled)
+	//			{
+	//				items[currentIndex].GetComponentInChildren<TMP_Text>().text = item.Value.ToString();
+	//			}
+	//			currentIndex++;
+	//		}
+
+	//		if(currentIndex<items.Length-1)
+	//		{
+	//			for(int i = currentIndex; i < items.Length; i++)
+	//			{
+	//				items[i].GetComponentInChildren<TMP_Text>().text = 0.ToString();
+	//				items[i].enabled = false;
+	//				items[i].interactable = false;
+	//			}
+	//		}
+	//	}
+	//}
+
+	private TeamManager GetCurrentTeamManager() { return inputManager.GetCurrentPlayer(); }
+
+	//private void MoveButtonStatus(bool b)
+	//{
+	//	if(gameButtons != null)
+	//	{
+	//		gameButtons[1].GetComponent<Button>().enabled = b;
+	//		gameButtons[1].GetComponent<Button>().interactable = b;
+	//	}
+	//}
+
+	public void OnMoveButtonClick()
+	{
+		inputManager.SetSelectionState(2);
+	}
+
+	public void OnSkipButtonClick()
+	{
+		NextTurn();
+	}
+
+	public void OnItemButtonClick(int i)
+	{
+		inputManager.SetSelectionState(3);
+		inputManager.SetItem(GetNameFromInt(i));
+	}
+
+	private string GetNameFromInt(int i)
+	{
+		if(i == 1)
+		{
+			return "Bomb";
+		} else
+		{
+			return "Large Bomb";
+		}
+	}
+
+	//private void GameState()
+	//{
+	//	if(inputManager.moveUsed && inputManager.itemUsed)
+	//	{
+	//		NextTurn();
+	//	}
+	//}
+
+	private void NextTurn()
+	{
+		inputManager.NextTurn();
+		turnCounter++;
+		if(turnCounter%2 == 0 && Random.Range(0,100)>40)
+		{
+			chestSpawner.SpawnChest();
+		}
+	}
+
+
+
+	//ISSUES:
+	//Camera bounds management in CameraController
+	//Issues with Direction of Force Vector (If point is greater than other point, goes negative when it should go positive. Negative works great) ** Did some more math and now its just flipped...
+}

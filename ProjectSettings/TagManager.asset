@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Pirate
+  - Pirate_Base
+  - Pirate_Blue
+  - Pirate_Red
+  - Point
+  - PlayerInputManager
+  - CameraController
+  - PirateButton
+  - Armory
+  - GameButton
+  - FallKiller
+  - Ground
+  - Explosion
+  - FxTemporaire
+  - Item
+  - Chest
+  - PreGameButton
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - Pirate
+  - Item
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Building
+    uniqueID: 1810469121
+    locked: 0
+  - name: Background
+    uniqueID: 4216429139
+    locked: 0
+  - name: Terrain
+    uniqueID: 2118049185
+    locked: 0
+  - name: Pirates
+    uniqueID: 505770393
+    locked: 0
+  - name: Items
+    uniqueID: 1705866211
+    locked: 0
+  - name: Effects
+    uniqueID: 416983305
+    locked: 0
